@@ -1,15 +1,30 @@
 'use client'
 import { useEffect, useState } from 'react'
 import RequestPermission from "@/components/requestPermission";
+import { parseLocationData } from '@/lib/location';
+import { storeGoogleLocations } from '@/lib/supabase';
+
 export default function Home() {
   const [location, setLocation] = useState();
+  const [neighborhood, setNeighborhood] = useState();
+  const [locality, setLocality] = useState();
+
   useEffect(() => {
     if ('geolocation' in navigator) {
       // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
       navigator.geolocation.getCurrentPosition(({ coords }) => {
         const { latitude, longitude } = coords;
         setLocation({ latitude, longitude });
-        console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+        const url = "/api?latitude=" + latitude + "&longitude=" + longitude
+        fetch(url)
+          .then((response) => response.json())
+          .then(async (data) => {
+            let location_categories = parseLocationData(data);
+            setNeighborhood(location_categories.neighborhood.long_name);
+            setLocality(location_categories.locality.long_name);
+            await storeGoogleLocations(data);
+          }
+          );
       })
     }
   }, []);
@@ -18,7 +33,12 @@ export default function Home() {
     <main>
       {location ? (
         <div>
-          Latitude: {location.latitude}, Longitude: {location.longitude}
+          {/* Latitude: {location.latitude}, Longitude: {location.longitude}
+          <br /> */}
+          Neighbourhood: {neighborhood}
+          <br />
+          Locality: {locality}
+
         </div>
       ) : (
         <RequestPermission />
