@@ -20,7 +20,9 @@ export default function Home() {
           .then((response) => response.json())
           .then(async (data) => {
             let location_categories = parseLocationData(data);
-            setNeighborhood(location_categories.neighborhood.long_name);
+            if (location_categories.neighborhood) {
+              setNeighborhood(location_categories.neighborhood.long_name);
+            }
             setLocality(location_categories.locality.long_name);
             await storeGoogleLocations(data);
           }
@@ -35,10 +37,17 @@ export default function Home() {
         <div>
           {/* Latitude: {location.latitude}, Longitude: {location.longitude}
           <br /> */}
-          Neighbourhood: {neighborhood}
-          <br />
-          Locality: {locality}
-
+          {neighborhood ? (
+            <div>
+              Neighbourhood: {neighborhood}
+              <br />
+              Locality: {locality}
+            </div>
+          ) : (
+            <div>
+              Locality: {locality}
+            </div>
+          )}
         </div>
       ) : (
         <RequestPermission />
