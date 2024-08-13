@@ -35,8 +35,6 @@ export default function Home() {
     <main>
       {location ? (
         <div>
-          {/* Latitude: {location.latitude}, Longitude: {location.longitude}
-          <br /> */}
           {neighborhood ? (
             <div>
               Neighbourhood: {neighborhood}

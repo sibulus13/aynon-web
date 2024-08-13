@@ -19,7 +19,7 @@ function uploadLocation(name, type, parent_id = null) {
 }
 
 // check if a location with the name and type already exists
-function checkLocation(name, type) {
+function getLocation(name, type) {
     return supabase
         .from('locations')
         .select('name')
@@ -36,28 +36,31 @@ function findLocationId(name, type) {
         .eq('type', type)
 }
 
+// Adds locations to the database starting with the country and working down to the neighborhood.
 export async function storeGoogleLocations(data) {
-    for (let i = data.results[0].address_components.length - 1; i >= 0; i--) {
+    let addresses = data.results[0].address_components.reverse();
+    for (let i = 0; i < addresses.length; i++) {
         const currentElement = data.results[0].address_components[i];
         const currentElementType = currentElement.types[0];
-        const { locationExists, error } = await checkLocation(currentElement.long_name, currentElementType);
-        console.log(locationExists);
+        const location = await getLocation(currentElement.long_name, currentElementType);
+        if (location.error) {
+            console.error(location.error);
+            return;
+        }
+        const locationExists = location.data.length > 0;
         if (!locationExists) {
-            console.log('no location found');
             let lastElementId = null;
             if (i > 0) {
                 const lastElement = data.results[0].address_components[i - 1];
-                const data2 = await findLocationId(lastElement.long_name, lastElement.types[0])
-                console.log(data2);
-                lastElementId = data2.data[0].id || null;
+                const parent_location = await findLocationId(lastElement.long_name, lastElement.types[0])
+                if (parent_location.error) {
+                    console.error(parent_location.error);
+                    return;
+                }
+                lastElementId = parent_location.data[0].id;
             }
-            const location = {
-                name: currentElement.long_name,
-                type: currentElementType,
-                parent_id: lastElementId
-            }
-            console.log(location);
-            await uploadLocation(currentElement.long_name, currentElementType, lastElementId);
+            // TODO: For whatever reason, even with the constraint of unique type and name, the country is still being uploaded twice.
+            let response = await uploadLocation(currentElement.long_name, currentElementType, lastElementId);
         }
     }
 }
