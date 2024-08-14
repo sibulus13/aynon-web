@@ -28,7 +28,7 @@ function getLocation(name, type) {
 }
 
 // find the id of a location with the name and type
-function findLocationId(name, type) {
+export async function findLocationId(name, type) {
     return supabase
         .from('locations')
         .select('id')
@@ -63,4 +63,18 @@ export async function storeGoogleLocations(data) {
             let response = await uploadLocation(currentElement.long_name, currentElementType, lastElementId);
         }
     }
+}
+
+export async function uploadPost(user, content, coord, region_id) {
+    coord = `POINT(${coord.longitude} ${coord.latitude})`
+    const { error } = await supabase
+        .from('posts')
+        .insert(
+            {
+                content: content,
+                coordinate: coord,
+                user_id: user,
+                location_id: region_id
+            }
+        )
 }

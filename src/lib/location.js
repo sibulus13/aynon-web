@@ -1,33 +1,18 @@
+import { findLocationId } from '@/lib/supabase';
+
 // Parses response to extract location name by their type
 // return Example:
 // {
 //     "neighborhood": {
 //         "long_name": "Guildford",
 //         "short_name": "Guildford"
-//     },
-//     "political": {
-//         "long_name": "Canada",
-//         "short_name": "CA"
-//     },
-//     "locality": {
-//         "long_name": "Surrey",
-//         "short_name": "Surrey"
-//     },
-//     "administrative_area_level_2": {
-//         "long_name": "Metro Vancouver",
-//         "short_name": "Metro Vancouver"
-//     },
-//     "administrative_area_level_1": {
-//         "long_name": "British Columbia",
-//         "short_name": "BC"
-//     },
+//     },...
 //     "country": {
 //         "long_name": "Canada",
 //         "short_name": "CA"
 //     }
 // }
 export function parseLocationData(data) {
-    console.log(data);
     const location_categories = {};
     data.results[0].address_components.forEach(component => {
         const types = component.types;
@@ -43,4 +28,13 @@ export function parseLocationData(data) {
         });
     });
     return location_categories;
+}
+
+// Finds the smallest location type and return its name and id
+export async function smallestRegion(data) {
+    let smallest = data.results[0].address_components[data.results[0].address_components.length - 1]
+    let region = smallest.long_name;
+    let res = await findLocationId(smallest.long_name, smallest.types[0])
+    let region_id = res.data[0].id;
+    return { region, region_id };
 }
