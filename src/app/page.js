@@ -1,16 +1,21 @@
 'use client'
 import { useEffect, useState } from 'react'
-import RequestPermission from "@/components/requestPermission";
-import { parseLocationData, smallestRegion } from '@/lib/location';
-import { storeGoogleLocations } from '@/lib/supabase';
+
+import InitialLoad from "@/components/InitialLoad";
 import Header from '@/components/Header';
+import NavBar from '@/components/NavBar';
 import Post from '@/components/Post';
 import Forum from '@/components/Forum';
+
+import { parseLocationData, smallestRegion } from '@/lib/location';
+import { storeGoogleLocations } from '@/lib/supabase';
 
 export default function Home() {
   const [coord, setCoord] = useState();
   const [region, setRegion] = useState();
   const [region_id, setRegion_id] = useState();
+  const [page, setPage] = useState('forum');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if ('geolocation' in navigator) {
@@ -27,6 +32,7 @@ export default function Home() {
             setRegion(region);
             setRegion_id(region_id);
             setCoord(coords);
+            setLoading(false);
           }
           );
       })
@@ -35,16 +41,27 @@ export default function Home() {
 
   return (
     <main>
-      {/* Show location, or require permission */}
-      {coord ? (
+      {!loading ? (
         <div>
           <Header region={region} />
-          <Forum coord={coord} />
-          <Post user={null} coord={coord}
-            region={region} region_id={region_id} />
+          {
+            page === 'forum' ?
+              <Forum coord={coord} />
+              : null
+          }
+          {
+            page === 'post' ?
+              <div>
+                <Post user={null} coord={coord} region_id={region_id} />
+              </div>
+              : null
+          }
+          <div className='absolute bottom-10 inset-x-1/2'>
+            <NavBar setPage={setPage} />
+          </div>
         </div>
       ) : (
-        <RequestPermission />
+        <InitialLoad />
       )}
     </main>
   );
