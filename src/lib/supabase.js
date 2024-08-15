@@ -83,6 +83,5 @@ export async function uploadPost(user, content, coord, region_id) {
 export async function getPosts(coord) {
     const { data, error } = await supabase.rpc('nearby_posts',
         { lat: coord.latitude, long: coord.longitude })
-    console.log(data, error)
     return data;
 }
