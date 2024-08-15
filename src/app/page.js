@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react'
 import RequestPermission from "@/components/requestPermission";
 import { parseLocationData, smallestRegion } from '@/lib/location';
 import { storeGoogleLocations } from '@/lib/supabase';
+import Header from '@/components/Header';
 import Post from '@/components/Post';
+import Forum from '@/components/Forum';
 
 export default function Home() {
   const [coord, setCoord] = useState();
@@ -36,8 +38,8 @@ export default function Home() {
       {/* Show location, or require permission */}
       {coord ? (
         <div>
-          {coord.latitude}, {coord.longitude}
-          {region}
+          <Header region={region} />
+          <Forum coord={coord} />
           <Post user={null} coord={coord}
             region={region} region_id={region_id} />
         </div>
