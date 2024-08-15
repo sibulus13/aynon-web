@@ -22,6 +22,6 @@
 
 @layer utilities {
   .container {
-    @apply flex justify-center;
+    @apply h-screen w-screen m-auto;
   }
 }

@@ -40,24 +40,30 @@ export default function Home() {
   }, []);
 
   return (
-    <main>
+    <main className='px-10 h-screen'>
       {!loading ? (
-        <div>
-          <Header region={region} />
-          {
-            page === 'forum' ?
-              <Forum coord={coord} />
-              : null
-          }
-          {
-            page === 'post' ?
-              <div>
-                <Post user={null} coord={coord} region_id={region_id} />
-              </div>
-              : null
-          }
-          <div className='absolute bottom-10 inset-x-1/2'>
-            <NavBar setPage={setPage} />
+        <div className='h-full'>
+          <div className='sticky top-0 bg-white p-2 border-b-2'>
+            <Header region={region} />
+          </div>
+          <div className='h-5/6 overflow-scroll'>
+            {
+              page === 'forum' ?
+                <Forum coord={coord} />
+                : null
+            }
+            {
+              page === 'post' ?
+                <div>
+                  <Post user={null} coord={coord} region_id={region_id} />
+                </div>
+                : null
+            }
+          </div>
+          <div className='sticky bottom-0 bg-white p-2 border-t-2'>
+            <div className='inset-x-1/2 rounded-full backdrop-filter backdrop-blur-3xl p-2'>
+              <NavBar setPage={setPage} />
+            </div>
           </div>
         </div>
       ) : (
