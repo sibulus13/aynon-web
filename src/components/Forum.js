@@ -22,6 +22,7 @@ const Forum = ({ coord }) => {
                     className='border-2 rounded-3xl p-2 max-w-4/5 grid gap-2'>
                     <div className='h-[calc(1.5em*2)] overflow-ellipsis line-clamp-2'>
                         <span className='text-xs'>{post.location_name}</span>
+                        {' '}
                         <span className='text-xs'>{random_canadian_animal(post.user_id)}</span>
                         <p className='text-xs'>{timeSince(post.created_at)}</p>
                     </div>

@@ -40,13 +40,13 @@ export default function Home() {
   }, []);
 
   return (
-    <main className='px-10 h-screen'>
+    <main className='px-10 h-screen md:px-40 lg:px-60'>
       {!loading ? (
         <div className='h-full'>
           <div className='sticky top-0 bg-white p-2 border-b-2'>
             <Header region={region} />
           </div>
-          <div className='h-5/6 overflow-scroll'>
+          <div className='h-5/6 overflow-y-scroll overflow-hidden'>
             {
               page === 'forum' ?
                 <Forum coord={coord} />
