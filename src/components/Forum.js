@@ -16,7 +16,7 @@ const Forum = ({ coord }) => {
     }, []);
 
     return (
-        <div className='grid gap-4 py-2'>
+        <div className='grid gap-4 py-4'>
             {posts.map(post => (
                 <div key={post.id}
                     className='border-2 rounded-3xl p-2 max-w-4/5 grid gap-2'>

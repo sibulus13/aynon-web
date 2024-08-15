@@ -14,8 +14,9 @@ export default function Home() {
   const [coord, setCoord] = useState();
   const [region, setRegion] = useState();
   const [region_id, setRegion_id] = useState();
-  const [page, setPage] = useState('forum');
+  const [page, setPage] = useState('post');
   const [loading, setLoading] = useState(true);
+  const [content, setContent] = useState();
 
   useEffect(() => {
     if ('geolocation' in navigator) {
@@ -46,20 +47,27 @@ export default function Home() {
           <div className='sticky top-0 bg-white p-2 border-b-2'>
             <Header region={region} />
           </div>
-          <div className='h-5/6 overflow-y-scroll overflow-hidden'>
-            {
-              page === 'forum' ?
+          {
+            page === 'forum' ?
+              <div className='h-5/6 overflow-y-scroll overflow-hidden'>
                 <Forum coord={coord} />
-                : null
-            }
-            {
-              page === 'post' ?
-                <div>
-                  <Post user={null} coord={coord} region_id={region_id} />
-                </div>
-                : null
-            }
-          </div>
+              </div>
+              : null
+          }
+          {
+            page === 'post' ?
+              <div className='h-5/6'>
+                <Post
+                  user={null}
+                  coord={coord}
+                  region_id={region_id}
+                  back={() => setPage('forum')}
+                  content={content}
+                  setContent={setContent}
+                />
+              </div>
+              : null
+          }
           <div className='sticky bottom-0 bg-white p-2 border-t-2'>
             <div className='inset-x-1/2 rounded-full backdrop-filter backdrop-blur-3xl p-2'>
               <NavBar setPage={setPage} />
