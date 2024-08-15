@@ -1,6 +1,6 @@
 import React from 'react';
 import { uploadPost } from '@/lib/supabase';
-const Post = ({ user, coord, region_id, back, content, setContent }) => {
+const Post = ({ user, coord, region_id, content, setContent }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!content) {
@@ -13,27 +13,25 @@ const Post = ({ user, coord, region_id, back, content, setContent }) => {
 
     return (
         <div className='h-full'>
-            <div className='flex justify-between py-2 pb-10'>
-                <button onClick={back}>
-                    Back Btn
-                </button>
+            <div className='flex justify-end py-2'>
                 <button
+                    className='text-right font-semibold disabled:text-gray-400'
                     disabled={!content}
-                    className='text-right disabled:text-gray-200'
                     onClick={handleSubmit}>
                     <span>
                         Send
                     </span>
                 </button>
             </div>
-            <form className='h-full flex-col'>
+            <form className='h-5/6 flex-col'>
                 <textarea
                     type="text"
-                    className='h-full w-full'
+                    className='h-full w-full p-2'
                     value={content}
                     placeholder={"What's on your mind?"}
                     onChange={(e) => setContent(e.target.value)}
                     maxLength={1500}
+                    resize='none'
                 />
             </form>
         </div>

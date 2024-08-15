@@ -15,7 +15,7 @@ const NavBar = ({ setPage }) => {
         ]
 
     return (
-        <div className='flex gap-14 justify-center text-3xl'>
+        <div className='flex gap-14 md:gap-40 lg:gap-80 justify-center text-3xl'>
             {buttons.map(button => (
                 <button key={button.name} onClick={() => handleButtonClick(button.name)}>{button.icon}</button>
             ))}

@@ -25,3 +25,7 @@
     @apply h-screen w-screen m-auto;
   }
 }
+
+textarea {
+  outline: none;
+}
