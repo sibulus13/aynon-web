@@ -9,16 +9,23 @@ import Forum from '@/components/Forum';
 
 import { parseLocationData, smallestRegion } from '@/lib/location';
 import { storeGoogleLocations } from '@/lib/supabase';
+import { canadianAnimals } from '@/lib/user';
 
 export default function Home() {
   const [coord, setCoord] = useState();
   const [region, setRegion] = useState();
   const [region_id, setRegion_id] = useState();
-  const [page, setPage] = useState('post');
+  const [page, setPage] = useState('forum');
   const [loading, setLoading] = useState(true);
   const [content, setContent] = useState();
+  let [userAnimal, setUserAnimal] = useState(canadianAnimals[0]);
 
   useEffect(() => {
+    let animal = localStorage.getItem('userAnimal');
+    if (animal) {
+      setUserAnimal(animal);
+    }
+
     if ('geolocation' in navigator) {
       // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
       navigator.geolocation.getCurrentPosition(({ coords }) => {
@@ -45,7 +52,7 @@ export default function Home() {
       {!loading ? (
         <div className='h-full'>
           <div className='sticky top-0 bg-white p-2 border-b-2'>
-            <Header region={region} />
+            <Header region={region} userAnimal={userAnimal} setUserAnimal={setUserAnimal} />
           </div>
           {
             page === 'forum' ?
@@ -59,11 +66,13 @@ export default function Home() {
               <div className='h-5/6'>
                 <Post
                   user={null}
+                  userAnimal={userAnimal}
                   coord={coord}
                   region_id={region_id}
                   back={() => setPage('forum')}
                   content={content}
                   setContent={setContent}
+                  setPage={setPage}
                 />
               </div>
               : null

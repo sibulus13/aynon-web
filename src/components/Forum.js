@@ -8,9 +8,9 @@ const Forum = ({ coord }) => {
     useEffect(() => {
         const fetchPosts = async () => {
             const posts = await getPosts(coord);
-            setPosts(dummyData);
+            // setPosts(dummyData);
             // setPosts([]);
-            // setPosts(posts);
+            setPosts(posts);
         }
         fetchPosts();
     }, []);
@@ -23,10 +23,10 @@ const Forum = ({ coord }) => {
                     <div className='h-[calc(1.5em*2)] overflow-ellipsis line-clamp-2'>
                         <span className='text-xs'>{post.location_name}</span>
                         {' '}
-                        <span className='text-xs'>{random_canadian_animal(post.user_id)}</span>
+                        <span className='text-xs'>{random_canadian_animal(post.animal)}</span>
                         <p className='text-xs'>{timeSince(post.created_at)}</p>
                     </div>
-                    <div class="h-[calc(1.5em*3)] overflow-hidden line-clamp-3">
+                    <div className="h-[calc(1.5em*3)] overflow-hidden line-clamp-3">
                         <p className='line-clamp-3 text-ellipsis overflow-hidden break-all'>{post.content}</p>
                     </div>
                 </div>

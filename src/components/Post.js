@@ -1,14 +1,16 @@
 import React from 'react';
+import { useState } from 'react';
 import { uploadPost } from '@/lib/supabase';
-const Post = ({ user, coord, region_id, content, setContent }) => {
+const Post = ({ user, userAnimal, coord, region_id, content, setContent, setPage }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!content) {
             console.log('Please enter a post');
             return;
         }
-        await uploadPost(user, content, coord, region_id);
+        await uploadPost(user, content, coord, region_id, userAnimal);
         setContent('');
+        setPage('forum');
     }
 
     return (
