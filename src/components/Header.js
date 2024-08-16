@@ -15,7 +15,6 @@ export default function Header({ region, userAnimal, setUserAnimal }) {
                 {region}</h1>
             <div className="flex items-center justify-center gap-2">
                 <IoMdGlasses className="text-3xl" />
-                Anon
                 <select
                     value={userAnimal}
                     onChange={setAnimal}
