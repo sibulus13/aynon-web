@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import InitialLoad from "@/components/InitialLoad";
 import Header from '@/components/Header';
 import NavBar from '@/components/NavBar';
-import Post from '@/components/Post';
+import UploadPost from '@/components/UploadPost';
 import Forum from '@/components/Forum';
 
 import { parseLocationData, smallestRegion } from '@/lib/location';
@@ -64,7 +64,7 @@ export default function Home() {
           {
             page === 'post' ?
               <div className='h-5/6'>
-                <Post
+                <UploadPost
                   user={null}
                   userAnimal={userAnimal}
                   coord={coord}

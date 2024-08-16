@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { uploadPost } from '@/lib/supabase';
-const Post = ({ user, userAnimal, coord, region_id, content, setContent, setPage }) => {
+const UploadPost = ({ user, userAnimal, coord, region_id, content, setContent, setPage }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!content) {
@@ -40,4 +40,4 @@ const Post = ({ user, userAnimal, coord, region_id, content, setContent, setPage
     );
 };
 
-export default Post;
+export default UploadPost;
