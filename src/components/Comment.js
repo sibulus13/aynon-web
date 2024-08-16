@@ -10,6 +10,7 @@ const Comment = ({ post }) => {
 
     return (
         <div>
+            <button>back</button>
             <div className='py-4'>
                 <Entry post={post} />
             </div>
