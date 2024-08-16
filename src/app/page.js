@@ -6,6 +6,7 @@ import Header from '@/components/Header';
 import NavBar from '@/components/NavBar';
 import UploadPost from '@/components/UploadPost';
 import Forum from '@/components/Forum';
+import Comment from '@/components/Comment';
 
 import { parseLocationData, smallestRegion } from '@/lib/location';
 import { storeGoogleLocations } from '@/lib/supabase';
@@ -18,6 +19,7 @@ export default function Home() {
   const [page, setPage] = useState('forum');
   const [loading, setLoading] = useState(true);
   const [content, setContent] = useState();
+  const [post, setPost] = useState(null);
   let [userAnimal, setUserAnimal] = useState(canadianAnimals[0]);
 
   useEffect(() => {
@@ -57,7 +59,7 @@ export default function Home() {
           {
             page === 'forum' ?
               <div className='h-5/6 overflow-y-scroll overflow-hidden'>
-                <Forum coord={coord} />
+                <Forum coord={coord} setPage={setPage} setPost={setPost} />
               </div>
               : null
           }
@@ -73,7 +75,15 @@ export default function Home() {
                   content={content}
                   setContent={setContent}
                   setPage={setPage}
+                  setPost={setPost}
                 />
+              </div>
+              : null
+          }
+          {
+            page === 'comment' ?
+              <div className='h-5/6'>
+                <Comment post={post}/>
               </div>
               : null
           }
