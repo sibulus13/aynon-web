@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Entry from './Entry';
-import { IoMdArrowBack } from 'react-icons/io';
 import { uploadComment, getComments } from '@/lib/supabase';
 
 const Comment = ({ post, userAnimal, region_id, back }) => {
@@ -29,12 +28,8 @@ const Comment = ({ post, userAnimal, region_id, back }) => {
     }
 
     return (
-        <div className='h-full'>
-            <button>
-                <IoMdArrowBack
-                    onClick={back}
-                    className='text-3xl mt-4' />
-            </button>
+        <div className=''>
+
             <div className='py-4'>
                 <Entry post={post} />
             </div>

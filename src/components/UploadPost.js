@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import { uploadPost } from '@/lib/supabase';
 const UploadPost = ({ user, userAnimal, coord, region_id, content, setContent, setPage }) => {
     const handleSubmit = async (e) => {
