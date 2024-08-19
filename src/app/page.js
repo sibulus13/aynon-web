@@ -83,7 +83,11 @@ export default function Home() {
           {
             page === 'comment' ?
               <div className='h-5/6'>
-                <Comment post={post}/>
+                <Comment
+                  post={post}
+                  userAnimal={userAnimal}
+                  back={() => setPage('forum')}
+                  region_id={region_id} />
               </div>
               : null
           }

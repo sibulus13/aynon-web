@@ -86,3 +86,26 @@ export async function getPosts(coord) {
         { lat: coord.latitude, long: coord.longitude })
     return data;
 }
+
+export async function uploadComment(user, post_id, content, userAnimal, region_id) {
+    const { error } = await supabase
+        .from('comments')
+        .insert(
+            {
+                content: content,
+                user_id: user,
+                post_id: post_id,
+                animal: userAnimal,
+                location_id: region_id
+            }
+        )
+}
+
+export async function getComments(post_id) {
+    const { data, error } = await supabase
+        .from('comments')
+        .select('*')
+        .eq('post_id', post_id)
+    console.log(data)
+    return data;
+}
