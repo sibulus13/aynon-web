@@ -106,6 +106,5 @@ export async function getComments(post_id) {
         .from('comments')
         .select('*')
         .eq('post_id', post_id)
-    console.log(data)
     return data;
 }

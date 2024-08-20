@@ -1,6 +1,5 @@
 'use client'
 import { useEffect, useState } from 'react'
-import OpenReplay from '@openreplay/tracker';
 import InitialLoad from "@/components/InitialLoad";
 import Header from '@/components/Header';
 import NavBar from '@/components/NavBar';
@@ -9,6 +8,7 @@ import Forum from '@/components/Forum';
 import Comment from '@/components/Comment';
 import FeedbackForm from '@/components/FeedBack';
 
+import tracker from '@/lib/openReplay';
 import { parseLocationData, smallestRegion } from '@/lib/location';
 import { storeGoogleLocations } from '@/lib/supabase';
 import { canadianAnimals } from '@/lib/user';
@@ -23,11 +23,7 @@ export default function Home() {
   const [post, setPost] = useState(null);
   let [userAnimal, setUserAnimal] = useState(canadianAnimals[0]);
 
-  const tracker = new OpenReplay({
-    projectKey: process.env.NEXT_PUBLIC_OPENREPLAY_PROJECT_KEY,
-  });
-  tracker.start(); // returns a promise with session info (sessionID, sessionHash, userUUID)
-
+  tracker.start();
 
   useEffect(() => {
     let animal = localStorage.getItem('userAnimal');
@@ -115,7 +111,7 @@ export default function Home() {
           </div>
           <div className='sticky bottom-0 bg-white p-2 border-t-2'>
             <div className='inset-x-1/2 rounded-full backdrop-filter backdrop-blur-3xl p-2'>
-              <NavBar setPage={setPage} page={page} />
+              <NavBar setPage={setPage} page={page} post={post} setPost={setPost} />
             </div>
           </div>
         </div>
