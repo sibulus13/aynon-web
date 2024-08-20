@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react'
 import InitialLoad from "@/components/InitialLoad";
 import Header from '@/components/Header';
 import NavBar from '@/components/NavBar';
-import UploadPost from '@/components/UploadPost';
+import PostForm from '@/components/PostForm';
 import Forum from '@/components/Forum';
 import Comment from '@/components/Comment';
+import FeedbackForm from '@/components/FeedBack';
 
 import { parseLocationData, smallestRegion } from '@/lib/location';
 import { storeGoogleLocations } from '@/lib/supabase';
@@ -52,20 +53,20 @@ export default function Home() {
   return (
     <main className='px-10 h-screen md:px-40 lg:px-60'>
       {!loading ? (
-        <div className='h-full'>
+        <div className='flex-col h-full'>
           <div className='sticky top-0 bg-white p-2 border-b-2'>
-            <Header region={region} userAnimal={userAnimal} setUserAnimal={setUserAnimal} />
+            <Header region={region} userAnimal={userAnimal} setUserAnimal={setUserAnimal} page={page} back={() => setPage('forum')} />
           </div>
           {
             page === 'forum' ?
-              <div className='h-5/6 overflow-y-scroll overflow-hidden'>
+              <div className='h-4/5 overflow-y-scroll'>
                 <Forum coord={coord} setPage={setPage} setPost={setPost} />
               </div>
               : null
           }
           {
             page === 'post' ?
-              <div className='h-5/6'>
+              <div className='h-4/5'>
                 <UploadPost
                   user={null}
                   userAnimal={userAnimal}
@@ -82,12 +83,19 @@ export default function Home() {
           }
           {
             page === 'comment' ?
-              <div className='h-5/6'>
+              <div className='h-4/5'>
                 <Comment
                   post={post}
                   userAnimal={userAnimal}
                   back={() => setPage('forum')}
                   region_id={region_id} />
+              </div>
+              : null
+          }
+          {
+            page === 'feedback' ?
+              <div className='h-4/5'>
+                <FeedbackForm></FeedbackForm>
               </div>
               : null
           }

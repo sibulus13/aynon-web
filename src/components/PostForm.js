@@ -1,6 +1,6 @@
 import React from 'react';
 import { uploadPost } from '@/lib/supabase';
-const UploadPost = ({ user, userAnimal, coord, region_id, content, setContent, setPage }) => {
+const PostForm = ({ user, userAnimal, coord, region_id, content, setContent, setPage }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!content) {
@@ -13,7 +13,7 @@ const UploadPost = ({ user, userAnimal, coord, region_id, content, setContent, s
     }
 
     return (
-        <div className='h-full'>
+        <div className='h-full flex-col'>
             <div className='flex justify-end py-2'>
                 <button
                     className='text-right font-semibold disabled:text-gray-400'
@@ -24,7 +24,7 @@ const UploadPost = ({ user, userAnimal, coord, region_id, content, setContent, s
                     </span>
                 </button>
             </div>
-            <form className='h-5/6 flex-col'>
+            <form className='grow'>
                 <textarea
                     type="text"
                     className='h-full w-full p-2'
@@ -39,4 +39,4 @@ const UploadPost = ({ user, userAnimal, coord, region_id, content, setContent, s
     );
 };
 
-export default UploadPost;
+export default PostForm;
