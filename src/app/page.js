@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-
+import OpenReplay from '@openreplay/tracker';
 import InitialLoad from "@/components/InitialLoad";
 import Header from '@/components/Header';
 import NavBar from '@/components/NavBar';
@@ -22,6 +22,12 @@ export default function Home() {
   const [content, setContent] = useState();
   const [post, setPost] = useState(null);
   let [userAnimal, setUserAnimal] = useState(canadianAnimals[0]);
+
+  const tracker = new OpenReplay({
+    projectKey: process.env.NEXT_PUBLIC_OPENREPLAY_PROJECT_KEY,
+  });
+  tracker.start(); // returns a promise with session info (sessionID, sessionHash, userUUID)
+  
 
   useEffect(() => {
     let animal = localStorage.getItem('userAnimal');
