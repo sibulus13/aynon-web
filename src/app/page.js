@@ -27,7 +27,7 @@ export default function Home() {
     projectKey: process.env.NEXT_PUBLIC_OPENREPLAY_PROJECT_KEY,
   });
   tracker.start(); // returns a promise with session info (sessionID, sessionHash, userUUID)
-  
+
 
   useEffect(() => {
     let animal = localStorage.getItem('userAnimal');
@@ -57,57 +57,65 @@ export default function Home() {
   }, []);
 
   return (
-    <main className='px-10 h-screen md:px-40 lg:px-60'>
+    <main className='px-10 md:px-40 lg:px-60 h-screen'>
       {!loading ? (
-        <div className='flex-col h-full'>
+        <div className='flex flex-col h-full'>
           <div className='sticky top-0 bg-white p-2 border-b-2'>
-            <Header region={region} userAnimal={userAnimal} setUserAnimal={setUserAnimal} page={page} back={() => setPage('forum')} />
+            <Header
+              region={region}
+              userAnimal={userAnimal}
+              setUserAnimal={setUserAnimal}
+              page={page}
+              back={() => setPage('forum')}
+            />
           </div>
-          {
-            page === 'forum' ?
-              <div className='h-4/5 overflow-y-scroll'>
-                <Forum coord={coord} setPage={setPage} setPost={setPost} />
-              </div>
-              : null
-          }
-          {
-            page === 'post' ?
-              <div className='h-4/5'>
-                <PostForm
-                  user={null}
-                  userAnimal={userAnimal}
-                  coord={coord}
-                  region_id={region_id}
-                  back={() => setPage('forum')}
-                  content={content}
-                  setContent={setContent}
-                  setPage={setPage}
-                  setPost={setPost}
-                />
-              </div>
-              : null
-          }
-          {
-            page === 'comment' ?
-              <div className='h-4/5'>
-                <Comment
-                  post={post}
-                  userAnimal={userAnimal}
-                  back={() => setPage('forum')}
-                  region_id={region_id} />
-              </div>
-              : null
-          }
-          {
-            page === 'feedback' ?
-              <div className='h-4/5'>
-                <FeedbackForm></FeedbackForm>
-              </div>
-              : null
-          }
+          <div className='grow overflow-y-auto'>
+            {
+              page === 'forum' ?
+                <div className=''>
+                  <Forum coord={coord} setPage={setPage} setPost={setPost} />
+                </div>
+                : null
+            }
+            {
+              page === 'post' ?
+                <div className=''>
+                  <PostForm
+                    user={null}
+                    userAnimal={userAnimal}
+                    coord={coord}
+                    region_id={region_id}
+                    back={() => setPage('forum')}
+                    content={content}
+                    setContent={setContent}
+                    setPage={setPage}
+                    setPost={setPost}
+                  />
+                </div>
+                : null
+            }
+            {
+              page === 'comment' ?
+                <div className='h-4/5'>
+                  <Comment
+                    post={post}
+                    userAnimal={userAnimal}
+                    back={() => setPage('forum')}
+                    region_id={region_id} />
+                </div>
+                : null
+            }
+            {
+              page === 'feedback' ?
+                <div className='h-4/5'>
+                  <FeedbackForm></FeedbackForm>
+                </div>
+                : null
+            }
+          </div>
           <div className='sticky bottom-0 bg-white p-2 border-t-2'>
             <div className='inset-x-1/2 rounded-full backdrop-filter backdrop-blur-3xl p-2'>
-              <NavBar setPage={setPage} />
+              <NavBar setPage={setPage} page={page} />
             </div>
           </div>
         </div>
