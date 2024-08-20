@@ -67,7 +67,7 @@ export default function Home() {
           {
             page === 'post' ?
               <div className='h-4/5'>
-                <UploadPost
+                <PostForm
                   user={null}
                   userAnimal={userAnimal}
                   coord={coord}
