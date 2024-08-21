@@ -7,19 +7,17 @@ import PostForm from '@/components/PostForm';
 import Forum from '@/components/Forum';
 import Comment from '@/components/Comment';
 import FeedbackForm from '@/components/FeedBack';
-
-import tracker from '@/lib/openReplay';
 import { smallestRegion } from '@/lib/location';
 import { storeGoogleLocations } from '@/lib/supabase';
 import { canadianAnimals } from '@/lib/user';
 import { uploadPost, uploadComment, getComments, getPosts } from '@/lib/supabase';
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
   const [coord, setCoord] = useState();
   const [region, setRegion] = useState();
   const [region_id, setRegion_id] = useState();
   const [page, setPage] = useState('forum');
-  const [loading, setLoading] = useState(true);
 
   const [user, setUser] = useState(null);
   const [userAnimal, setUserAnimal] = useState(canadianAnimals[0]);
@@ -29,9 +27,6 @@ export default function Home() {
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
   const [posts, setPosts] = useState([]);
-
-
-  tracker.start();
 
   const fetchComments = async (post) => {
     const comments = await getComments(post.id);
@@ -45,8 +40,6 @@ export default function Home() {
   }
 
   const upLoadContent = async () => {
-    console.log('here')
-
     if (!content) {
       console.log('Please enter text to post');
       return;
