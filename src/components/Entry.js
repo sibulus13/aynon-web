@@ -2,7 +2,7 @@ import React from 'react';
 import { timeSince } from '@/lib/time';
 import { random_canadian_animal } from '@/lib/user';
 
-const Entry = ({ post, onClick }) => {
+const Entry = ({ post, onClick = () => { } }) => {
 
     return (
         <div onClick={() => onClick()}

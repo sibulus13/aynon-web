@@ -1,29 +1,9 @@
 import React from 'react';
-import { uploadPost } from '@/lib/supabase';
-const PostForm = ({ user, userAnimal, coord, region_id, content, setContent, setPage }) => {
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (!content) {
-            console.log('Please enter a post');
-            return;
-        }
-        await uploadPost(user, content, coord, region_id, userAnimal);
-        setContent('');
-        setPage('forum');
-    }
+
+const PostForm = ({ content, setContent }) => {
 
     return (
         <div className='h-full flex-col'>
-            <div className='flex justify-end py-2'>
-                <button
-                    className='text-right font-semibold disabled:text-gray-400'
-                    disabled={!content}
-                    onClick={handleSubmit}>
-                    <span>
-                        Send
-                    </span>
-                </button>
-            </div>
             <form className='grow'>
                 <textarea
                     type="text"
