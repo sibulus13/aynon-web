@@ -14,7 +14,7 @@ const NavBar = ({ setPage, page, send, content, setContent }) => {
         [
             { name: 'forum', label: 'Forum', icon: <MdForum /> },
             { name: 'post', label: 'Post', icon: <IoMdAddCircleOutline /> },
-            { name: 'feedback', label: 'Feedback', icon: <MdOutlineFeedback /> },
+            // { name: 'feedback', label: 'Feedback', icon: <MdOutlineFeedback /> },
         ]
 
     return (
