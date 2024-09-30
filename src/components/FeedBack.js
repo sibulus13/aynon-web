@@ -6,8 +6,6 @@ const FeedbackForm = () => {
     const [text, setText] = useState('');
 
     const handleSubmit = () => {
-        // Placeholder function to handle form submission
-        // You can replace this with your own logic to handle the feedback data
         console.log('Submitting feedback:', { name, email, text });
     };
 

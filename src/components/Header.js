@@ -19,7 +19,7 @@ export default function Header({ region, userAnimal, setUserAnimal, page, back, 
     }
 
     function showPostButton() {
-        if (page === 'post' || page === 'comment') {
+        if (page === 'post' || page === 'comment' || page === 'feedback') {
             return { visibility: 'visible', disabled: false };
         };
         return { visibility: 'hidden', disabled: true };
@@ -30,7 +30,7 @@ export default function Header({ region, userAnimal, setUserAnimal, page, back, 
             <h1 className='text-center flex gap-2 justify-center'>
                 <FaLocationDot />
                 {region}</h1>
-            <div className="flex gap-2 justify-stretch">
+            <div className="flex gap-2 justify-between">
                 <button>
                     <IoMdArrowBack
                         onClick={back}
