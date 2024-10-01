@@ -12,6 +12,8 @@ import { storeGoogleLocations } from '@/lib/supabase';
 import { canadianAnimals } from '@/lib/user';
 import { uploadPost, uploadComment, getComments, getPosts } from '@/lib/supabase';
 
+import { MdAddCircleOutline } from "react-icons/md";
+
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [coord, setCoord] = useState();
@@ -151,17 +153,6 @@ export default function Home() {
                 </div>
                 : null
             }
-          </div>
-          <div className='sticky bottom-0 bg-white p-2 border-t-2'>
-            <div className='inset-x-1/2 rounded-full backdrop-filter backdrop-blur-3xl p-2'>
-              {/* <NavBar
-                setPage={setPage}
-                page={page}
-                content={content}
-                setContent={setContent}
-                send={async () => await upLoadContent()}
-              /> */}
-            </div>
           </div>
         </div>
       ) : (
