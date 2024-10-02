@@ -19,7 +19,7 @@ export default function Home() {
   const [coord, setCoord] = useState();
   const [region, setRegion] = useState();
   const [region_id, setRegion_id] = useState();
-  const [page, setPage] = useState('post');
+  const [page, setPage] = useState('forum');
 
   const [user, setUser] = useState(null);
   const [userAnimal, setUserAnimal] = useState(canadianAnimals[0]);
@@ -173,6 +173,12 @@ export default function Home() {
                 </div>
                 : null
             }
+          </div>
+          <div>
+            <MdAddCircleOutline
+              className='fixed text-5xl cursor-pointer inset-x-1/2 bottom-20'
+              onClick={() => setPage('post')}
+            />
           </div>
         </div>
       ) : (
