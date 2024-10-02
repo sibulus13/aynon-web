@@ -77,6 +77,13 @@ export default function Home() {
     setPosts(posts);
   }
 
+  const showPostButton = () => {
+    if (page === 'forum') {
+      return { visibility: 'visible', disabled: false };
+    };
+    return { visibility: 'hidden', disabled: true };
+  }
+
   useEffect(() => {
     let animal = localStorage.getItem('userAnimal');
     if (animal) {
@@ -178,6 +185,8 @@ export default function Home() {
             <MdAddCircleOutline
               className='fixed text-5xl cursor-pointer inset-x-1/2 bottom-20'
               onClick={() => setPage('post')}
+              visibility={showPostButton().visibility}
+              disabled={showPostButton().disabled}
             />
           </div>
         </div>
