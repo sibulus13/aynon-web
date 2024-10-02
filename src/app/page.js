@@ -17,7 +17,7 @@ export default function Home() {
   const [coord, setCoord] = useState();
   const [region, setRegion] = useState();
   const [region_id, setRegion_id] = useState();
-  const [page, setPage] = useState('feedback');
+  const [page, setPage] = useState('post');
 
   const [user, setUser] = useState(null);
   const [userAnimal, setUserAnimal] = useState(canadianAnimals[0]);
