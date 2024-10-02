@@ -186,7 +186,7 @@ export default function Home() {
           </div>
           <div>
             <MdAddCircleOutline
-              className='fixed text-5xl cursor-pointer inset-x-1/2 bottom-20'
+              className='fixed text-5xl cursor-pointer inset-x-1/2 bottom-20 bg-white rounded-full'
               onClick={() => setPage('post')}
               visibility={showPostButton().visibility}
               disabled={showPostButton().disabled}
