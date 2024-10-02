@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
 
-const FeedbackForm = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [text, setText] = useState('');
-
-    const handleSubmit = () => {
-        console.log('Submitting feedback:', { name, email, text });
-    };
-
+const FeedbackForm = ({ send, name, email, content, setName, setEmail, setContent }) => {
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={send}>
                 <label>
                     Name:
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
@@ -24,7 +16,7 @@ const FeedbackForm = () => {
                 <br />
                 <label>
                     Feedback:
-                    <textarea value={text} onChange={(e) => setText(e.target.value)} />
+                    <textarea value={content} onChange={(e) => setContent(e.target.value)} />
                 </label>
                 <br />
                 <button type="submit">Submit</button>

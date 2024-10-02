@@ -10,14 +10,14 @@ import FeedbackForm from '@/components/FeedBack';
 import { smallestRegion } from '@/lib/location';
 import { storeGoogleLocations } from '@/lib/supabase';
 import { canadianAnimals } from '@/lib/user';
-import { uploadPost, uploadComment, getComments, getPosts } from '@/lib/supabase';
+import { uploadPost, uploadComment, uploadFeedback, getComments, getPosts } from '@/lib/supabase';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [coord, setCoord] = useState();
   const [region, setRegion] = useState();
   const [region_id, setRegion_id] = useState();
-  const [page, setPage] = useState('forum');
+  const [page, setPage] = useState('feedback');
 
   const [user, setUser] = useState(null);
   const [userAnimal, setUserAnimal] = useState(canadianAnimals[0]);
@@ -27,6 +27,10 @@ export default function Home() {
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
   const [posts, setPosts] = useState([]);
+
+  // feedback states
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
 
   const fetchComments = async (post) => {
     const comments = await getComments(post.id);
@@ -43,6 +47,14 @@ export default function Home() {
     if (!content) {
       console.log('Please enter text to post');
       return;
+    }
+
+    if (page === 'feedback') {
+      console.log('Feedback submitted:', { content });
+      await uploadFeedback(name, email, content);
+      setName('');
+      setEmail('');
+      setContent('');
     }
 
     if (post) {
@@ -147,7 +159,15 @@ export default function Home() {
             {
               page === 'feedback' ?
                 <div className='h-4/5'>
-                  <FeedbackForm></FeedbackForm>
+                  <FeedbackForm
+                    send={async () => await upLoadContent()}
+                    setName={setName}
+                    setEmail={setEmail}
+                    setContent={setContent}
+                    name={name}
+                    email={email}
+                    content={content}
+                  />
                 </div>
                 : null
             }

@@ -108,3 +108,15 @@ export async function getComments(post_id) {
         .eq('post_id', post_id)
     return data;
 }
+
+export async function uploadFeedback(name, email, content) {
+    const { error } = await supabase
+        .from('feedback')
+        .insert(
+            {
+                name: name,
+                email: email,
+                content: content
+            }
+        )
+}
