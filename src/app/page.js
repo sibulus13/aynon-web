@@ -1,3 +1,5 @@
+// TODO clean up commented code
+
 'use client'
 import { useEffect, useState } from 'react'
 import InitialLoad from "@/components/InitialLoad";
@@ -45,7 +47,8 @@ export default function Home() {
     setPage('comment');
   }
 
-  const upLoadContent = async () => {
+  const upLoadContent = async (e) => {
+    e.preventDefault();
     if (!content) {
       console.log('Please enter text to post');
       return;
@@ -187,6 +190,15 @@ export default function Home() {
               onClick={() => setPage('post')}
               visibility={showPostButton().visibility}
               disabled={showPostButton().disabled}
+            />
+          </div>
+          <div className='sticky bottom-0 bg-white p-2 border-t-2'>
+            <NavBar
+              setPage={setPage}
+              page={page}
+              send={upLoadContent}
+              content={content}
+              setContent={setContent}
             />
           </div>
         </div>

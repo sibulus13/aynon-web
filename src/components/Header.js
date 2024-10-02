@@ -39,7 +39,6 @@ export default function Header({ region, userAnimal, setUserAnimal, page, back, 
                         visibility={showBackButton().visibility}
                     />
                 </button>
-                <br></br>
                 {page === 'post' && (
                     <div className='flex'>
                         <IoMdGlasses className="text-2xl" />
@@ -54,7 +53,7 @@ export default function Header({ region, userAnimal, setUserAnimal, page, back, 
                         </select>
                     </div>
                 )}
-                <button>
+                {/* <button>
                     <IoIosSend
                         onClick={() => send()}
                         className="text-2xl font-semibold disabled:text-gray-300"
@@ -62,7 +61,7 @@ export default function Header({ region, userAnimal, setUserAnimal, page, back, 
                         visibility={showPostButton().visibility}
                     >
                     </IoIosSend>
-                </button>
+                </button> */}
             </div>
         </div>
     )
