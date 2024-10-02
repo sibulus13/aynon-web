@@ -40,20 +40,21 @@ export default function Header({ region, userAnimal, setUserAnimal, page, back, 
                     />
                 </button>
                 <br></br>
-                <div className="flex">
-                    <IoMdGlasses className="text-2xl" />
-                    <select
-                        className="text-center"
-                        value={userAnimal}
-                        onChange={setAnimal}
-                    >
-                        {canadianAnimals.map((animal, index) => (
-                            <option key={index} value={animal}>{animal}</option>
-                        ))}
-                    </select>
-                </div>
-                <button
-                >
+                {page === 'post' && (
+                    <div className='flex'>
+                        <IoMdGlasses className="text-2xl" />
+                        <select
+                            className="text-center"
+                            value={userAnimal}
+                            onChange={setAnimal}
+                        >
+                            {canadianAnimals.map((animal, index) => (
+                                <option key={index} value={animal}>{animal}</option>
+                            ))}
+                        </select>
+                    </div>
+                )}
+                <button>
                     <IoIosSend
                         onClick={() => send()}
                         className="text-2xl font-semibold disabled:text-gray-300"
