@@ -12,7 +12,7 @@ const NavBar = ({ setPage, page, send, content, setContent }) => {
 
     const buttons =
         [
-            { name: 'forum', label: 'Forum', icon: <MdForum /> },
+            // { name: 'forum', label: 'Forum', icon: <MdForum /> },
             { name: 'post', label: 'Post', icon: <IoMdAddCircleOutline /> },
             // { name: 'feedback', label: 'Feedback', icon: <MdOutlineFeedback /> },
         ]
