@@ -1,5 +1,12 @@
 import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,11 +23,19 @@ const OpenReplayNoSSR = dynamic(() => import('@/components/OpenReplay'), {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={"container p-2" + inter.className}>
-        <OpenReplayNoSSR />
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={"container p-2" + inter.className}>
+          <SignedOut>
+            <SignInButton />
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+          <OpenReplayNoSSR />
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

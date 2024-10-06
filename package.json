@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^5.7.1",
     "@openreplay/tracker": "^14.0.4",
     "@supabase/supabase-js": "^2.45.1",
     "next": "14.2.5",
