@@ -13,7 +13,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "AynonA",
-  description: "Just another social platform",
+  description: "A Canadian anonymous social forum",
+  rel: "icon",
+  href: "/icon.ico",
+
 };
 
 const OpenReplayNoSSR = dynamic(() => import('@/components/OpenReplay'), {
