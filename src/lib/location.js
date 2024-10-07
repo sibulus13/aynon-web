@@ -12,6 +12,19 @@ import { findLocationId } from '@/lib/supabase';
 //         "short_name": "CA"
 //     }
 // }
+
+// Checks if the location is within Canada
+export function withinCanada(data) {
+    for (let i = 0; i < data.results[0].address_components.length; i++) {
+        let component = data.results[0].address_components[i];
+        if (component.types.includes('country') && component.long_name === 'Canada') {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Legacy TODO: Remove
 export function parseLocationData(data) {
     const location_categories = {};
     data.results[0].address_components.forEach(component => {
@@ -35,7 +48,6 @@ export async function smallestRegion(data) {
     let smallest = data.results[0].address_components[data.results[0].address_components.length - 1]
     let region = smallest.long_name;
     let res = await findLocationId(smallest.long_name, smallest.types[0])
-    // console.log(res);
     if (!res.data || res.data.length === 0) {
         return {
             region: '', region_id: - 1
