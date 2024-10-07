@@ -8,6 +8,7 @@ import {
   UserButton
 } from '@clerk/nextjs'
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body className={"container p-2 " + inter.className}>
           <OpenReplayNoSSR />
+          <Analytics id="FVZQZQ6QZJ" />
           {children}
         </body>
       </html>
