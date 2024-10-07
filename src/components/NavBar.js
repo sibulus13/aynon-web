@@ -11,6 +11,13 @@ const NavBar = ({ setPage, page, send, content, setContent }) => {
 
     const showSubmit = page === 'comment' || page === 'post' || page === 'feedback';
     const showTextInput = page === 'comment' || page === 'feedback';
+    const textarea = document.getElementById('content');
+    if (textarea) {
+        textarea.addEventListener("input", function () {
+            this.style.height = "auto";  // Reset height to auto
+            this.style.height = (this.scrollHeight) + "px";  // Set new height based on scroll height
+        });
+    }
 
     const buttons =
         [
@@ -26,9 +33,11 @@ const NavBar = ({ setPage, page, send, content, setContent }) => {
                     {showTextInput ?
                         <div className='flex'>
                             <textarea
-                                className='flex-grow'
+                                id='content'
+                                className='w-full h-auto resize-none'
                                 placeholder='Leave a thought, or a few thoughts, here'
                                 value={content}
+                                maxLength={500}
                                 onChange={(e) => setContent(e.target.value)}
                             />
                         </div>

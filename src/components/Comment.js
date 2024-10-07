@@ -4,11 +4,11 @@ import Entry from './Entry';
 const Comment = ({ post, comments }) => {
     return (
         <div>
-            <div className='py-4'>
+            <div className='p-4'>
                 <Entry post={post} />
             </div>
-            <hr className='p-2'></hr>
-            <div className='flex flex-col gap-2'>
+            <hr></hr>
+            <div className='flex flex-col gap-2 p-4'>
                 {comments.map(comment => (
                     <div key={comment.id}>
                         <Entry post={comment} />

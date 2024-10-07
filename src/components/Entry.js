@@ -13,8 +13,8 @@ const Entry = ({ post, onClick = () => { } }) => {
                 <span className='text-xs'>{random_canadian_animal(post.animal)}</span>
                 <p className='text-xs'>{timeSince(post.created_at)}</p>
             </div>
-            <div className="h-[calc(1.5em*3)] overflow-hidden line-clamp-3">
-                <p className='line-clamp-3 text-ellipsis overflow-hidden break-all'>{post.content}</p>
+            <div className="overflow-hidden">
+                <p className='break-all'>{post.content}</p>
             </div>
         </div>
     );

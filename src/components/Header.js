@@ -28,38 +28,49 @@ export default function Header({ region, userAnimal, setUserAnimal, page, back, 
         return { visibility: 'hidden', disabled: true };
     }
 
+    function showAnimalSelector() {
+        if (page === 'post' || page === 'comment') {
+            return true;
+        };
+        return false;
+    }
+
     return (
         <div>
             <h1 className='text-center flex gap-2 justify-center'>
                 <FaLocationDot />
                 {region}
             </h1>
-            <div className='flex justify-end' >
-                <UserButton />
-            </div>
-            <div className="flex gap-2 justify-between">
-                <button>
-                    <IoMdArrowBack
-                        onClick={back}
-                        className='text-2xl'
-                        disabled={showBackButton().disabled}
-                        visibility={showBackButton().visibility}
-                    />
-                </button>
-                {page === 'post' && (
-                    <div className='flex'>
-                        <IoMdGlasses className="text-2xl" />
-                        <select
-                            className="text-center"
-                            value={userAnimal}
-                            onChange={setAnimal}
-                        >
-                            {canadianAnimals.map((animal, index) => (
-                                <option key={index} value={animal}>{animal}</option>
-                            ))}
-                        </select>
-                    </div>
-                )}
+            <div className="grid grid-cols-3 gap-2">
+                <span className="grid-cols-1">
+                    <button>
+                        <IoMdArrowBack
+                            onClick={back}
+                            className='text-2xl'
+                            disabled={showBackButton().disabled}
+                            visibility={showBackButton().visibility}
+                        />
+                    </button>
+                </span>
+                <span className="grid-cols-1 flex justify-center">
+                    <UserButton />
+                </span>
+                <span className="grid-cols-1">
+                    {showAnimalSelector() && (
+                        <div className='flex justify-end pt-2'>
+                            <IoMdGlasses className="text-2xl" />
+                            <select
+                                className="text-center"
+                                value={userAnimal}
+                                onChange={setAnimal}
+                            >
+                                {canadianAnimals.map((animal, index) => (
+                                    <option key={index} value={animal}>{animal}</option>
+                                ))}
+                            </select>
+                        </div>
+                    )}
+                </span>
                 {/* <button>
                     <IoIosSend
                         onClick={() => send()}
