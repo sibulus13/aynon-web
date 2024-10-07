@@ -3,6 +3,9 @@ import { canadianAnimals } from '@/lib/user';
 import { IoMdGlasses } from "react-icons/io";
 import { IoMdArrowBack } from 'react-icons/io';
 import { IoIosSend } from "react-icons/io";
+import {
+    UserButton
+} from '@clerk/nextjs'
 
 export default function Header({ region, userAnimal, setUserAnimal, page, back, send }) {
     function setAnimal(e) {
@@ -29,7 +32,11 @@ export default function Header({ region, userAnimal, setUserAnimal, page, back, 
         <div>
             <h1 className='text-center flex gap-2 justify-center'>
                 <FaLocationDot />
-                {region}</h1>
+                {region}
+            </h1>
+            <div className='flex justify-end' >
+                <UserButton />
+            </div>
             <div className="flex gap-2 justify-between">
                 <button>
                     <IoMdArrowBack

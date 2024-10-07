@@ -21,6 +21,7 @@
     "react-loading": "^2.0.3"
   },
   "devDependencies": {
+    "@types/react": "18.3.11",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",
