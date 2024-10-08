@@ -17,7 +17,7 @@ import { MdAddCircleOutline } from "react-icons/md";
 import { useUser } from '@clerk/clerk-react'
 
 export default function Home() {
-  const { user } = useUser()
+  const { user, isLoaded } = useUser()
   const [loading, setLoading] = useState(true);
   const [inCanada, setInCanada] = useState(true);
   const [coord, setCoord] = useState();
@@ -75,7 +75,8 @@ export default function Home() {
   }
 
   const fetchPosts = async (coord) => {
-    const posts = await getPosts(coord);
+    const posts = await getPosts(coord, user.id);
+    console.log(posts)
     setPosts(posts);
   }
 
@@ -93,7 +94,7 @@ export default function Home() {
       setUserAnimal(animal);
     }
 
-    if ('geolocation' in navigator) {
+    if ('geolocation' in navigator && isLoaded) {
       navigator.geolocation.getCurrentPosition(({ coords }) => {
         const { latitude, longitude } = coords;
         const url = "/api?latitude=" + latitude + "&longitude=" + longitude
@@ -110,13 +111,13 @@ export default function Home() {
             setRegion(region);
             setRegion_id(region_id);
             setCoord(coords);
-            await fetchPosts(coords);
+            await fetchPosts(coords, user?.id);
             setLoading(false);
           }
           );
       })
     }
-  }, []);
+  }, [isLoaded]);
 
   return (
     <main className='px-10 md:px-40 lg:px-60 h-screen'>
