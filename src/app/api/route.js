@@ -6,7 +6,6 @@ export async function GET(request) {
     let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${API_KEY}&result_type=neighborhood|locality`;
     const res = await fetch(url);
     const data = await res.json();
-    // console.log(data);
     return new Response(JSON.stringify(data), {
         headers: {
             'content-type': 'application/json',

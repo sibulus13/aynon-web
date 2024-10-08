@@ -84,6 +84,11 @@ export async function uploadPost(user_id, content, coord, region_id, userAnimal)
 export async function getPosts(coord, user_id) {
     const { data, error } = await supabase.rpc('nearby_posts',
         { lat: coord.latitude, long: coord.longitude, userid: user_id })
+    if (error) {
+        console.error(error);
+        return [];
+    }
+    console.log(data);
     return data;
 }
 
@@ -101,11 +106,14 @@ export async function uploadComment(user_id, post_id, content, userAnimal, regio
         )
 }
 
-export async function getComments(post_id) {
-    const { data, error } = await supabase
-        .from('comments')
-        .select('*, locations(name)')
-        .eq('post_id', post_id)
+export async function getComments(post_id, user_id) {
+    const { data, error } = await supabase.rpc('get_comments',
+        { postid: post_id, userid: user_id })
+    if (error) {
+        console.error(error);
+        return [];
+    }
+    console.log(data);
     return data;
 }
 

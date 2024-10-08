@@ -36,7 +36,7 @@ export default function Home() {
   const [email, setEmail] = useState('');
 
   const fetchComments = async (post) => {
-    const comments = await getComments(post.id);
+    const comments = await getComments(post.id, user.id);
     setComments(comments);
   }
 
@@ -54,7 +54,6 @@ export default function Home() {
     }
 
     if (page === 'feedback') {
-      console.log('Feedback submitted:', { content });
       await uploadFeedback(name, email, content);
       setName('');
       setEmail('');
@@ -76,7 +75,6 @@ export default function Home() {
 
   const fetchPosts = async (coord) => {
     const posts = await getPosts(coord, user.id);
-    console.log(posts)
     setPosts(posts);
   }
 
@@ -148,7 +146,7 @@ export default function Home() {
                       setPost={setPost}
                       setPosts={setPosts}
                       toComments={toComments}
-                      user_id={user.id}
+                      user_id={user?.id}
                     />
                   </div>
                   : null
@@ -172,6 +170,7 @@ export default function Home() {
                       back={() => setPage('forum')}
                       region_id={region_id}
                       comments={comments}
+                      user_id={user?.id}
                     />
                   </div>
                   : null

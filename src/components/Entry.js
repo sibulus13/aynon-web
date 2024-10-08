@@ -2,7 +2,7 @@ import React from 'react';
 import { timeSince } from '@/lib/time';
 import { useState } from 'react';
 import { BiUpvote, BiSolidUpvote, BiDownvote, BiSolidDownvote } from "react-icons/bi";
-import { upsertPostVote, upSertCommentVote } from '@/lib/supabase';
+import { upsertPostVote, upsertCommentVote } from '@/lib/supabase';
 const Entry = ({ post, user_id, type = 'post', onClick = () => { } }) => {
     let [vote, setVote] = useState(post.user_vote);
     function updateVote(vote) {
@@ -11,7 +11,7 @@ const Entry = ({ post, user_id, type = 'post', onClick = () => { } }) => {
             upsertPostVote(user_id, post.id, vote);
         }
         if (type === 'comment') {
-            upSertCommentVote(user_id, post.post_id, vote);
+            upsertCommentVote(user_id, post.id, vote);
         }
     }
     return (
