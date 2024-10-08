@@ -15,6 +15,12 @@ const Comment = ({ post, comments, user_id }) => {
                         />
                     </div>
                 ))}
+                {comments.length === 0 && (
+                    <div className='flex justify-center text-gray-500'>
+                        <p>Be the first to reply!</p>
+                    </div>
+                )}
+
             </div>
         </div>
     );

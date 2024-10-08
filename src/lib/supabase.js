@@ -88,7 +88,6 @@ export async function getPosts(coord, user_id) {
         console.error(error);
         return [];
     }
-    console.log(data);
     return data;
 }
 
@@ -113,7 +112,6 @@ export async function getComments(post_id, user_id) {
         console.error(error);
         return [];
     }
-    console.log(data);
     return data;
 }
 
