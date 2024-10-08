@@ -65,7 +65,7 @@ export async function storeGoogleLocations(data) {
     }
 }
 
-export async function uploadPost(user, content, coord, region_id, userAnimal) {
+export async function uploadPost(user_id, content, coord, region_id, userAnimal) {
     coord = `POINT(${coord.longitude} ${coord.latitude})`
     const { error } = await supabase
         .from('posts')
@@ -73,7 +73,7 @@ export async function uploadPost(user, content, coord, region_id, userAnimal) {
             {
                 content: content,
                 coordinate: coord,
-                user_id: user,
+                user_id: user_id,
                 location_id: region_id,
                 animal: userAnimal
             }
@@ -87,13 +87,13 @@ export async function getPosts(coord) {
     return data;
 }
 
-export async function uploadComment(user, post_id, content, userAnimal, region_id) {
+export async function uploadComment(user_id, post_id, content, userAnimal, region_id) {
     const { error } = await supabase
         .from('comments')
         .insert(
             {
                 content: content,
-                user_id: user,
+                user_id: user_id,
                 post_id: post_id,
                 animal: userAnimal,
                 location_id: region_id

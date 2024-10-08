@@ -13,20 +13,18 @@ import { smallestRegion, withinCanada } from '@/lib/location';
 import { storeGoogleLocations } from '@/lib/supabase';
 import { canadianAnimals } from '@/lib/user';
 import { uploadPost, uploadComment, uploadFeedback, getComments, getPosts } from '@/lib/supabase';
-
 import { MdAddCircleOutline } from "react-icons/md";
+import { useUser } from '@clerk/clerk-react'
 
 export default function Home() {
+  const { isSignedIn, user, isLoaded } = useUser()
   const [loading, setLoading] = useState(true);
   const [inCanada, setInCanada] = useState(true);
   const [coord, setCoord] = useState();
   const [region, setRegion] = useState();
   const [region_id, setRegion_id] = useState();
   const [page, setPage] = useState('forum');
-
-  const [user, setUser] = useState(null);
   const [userAnimal, setUserAnimal] = useState(canadianAnimals[0]);
-
   const [content, setContent] = useState('');
   // fetched content
   const [post, setPost] = useState(null);
@@ -64,12 +62,12 @@ export default function Home() {
     }
 
     if (post) {
-      await uploadComment(user, post.id, content, userAnimal, region_id);
+      await uploadComment(user.id, post.id, content, userAnimal, region_id);
       await fetchComments(post);
       setContent('');
     }
     else {
-      await uploadPost(user, content, coord, region_id, userAnimal);
+      await uploadPost(user.id, content, coord, region_id, userAnimal);
       await fetchPosts(coord);
       setContent('');
       setPage('forum');
@@ -88,6 +86,7 @@ export default function Home() {
     return { visibility: 'hidden', disabled: true };
   }
 
+  // Fetches and stores user location data
   useEffect(() => {
     let animal = localStorage.getItem('userAnimal');
     if (animal) {
