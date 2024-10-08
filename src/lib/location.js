@@ -24,25 +24,6 @@ export function withinCanada(data) {
     return false;
 }
 
-// Legacy TODO: Remove
-export function parseLocationData(data) {
-    const location_categories = {};
-    data.results[0].address_components.forEach(component => {
-        const types = component.types;
-        types.forEach(type => {
-            switch (type) {
-                default:
-                    let location_info = {
-                        long_name: component.long_name,
-                        short_name: component.short_name
-                    }
-                    location_categories[type] = location_info;
-            }
-        });
-    });
-    return location_categories;
-}
-
 // Finds the smallest location type and return its name and id
 export async function smallestRegion(data) {
     let smallest = data.results[0].address_components[data.results[0].address_components.length - 1]

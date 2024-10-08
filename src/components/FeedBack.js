@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const FeedbackForm = ({ send, name, email, content, setName, setEmail, setContent }) => {
     return (

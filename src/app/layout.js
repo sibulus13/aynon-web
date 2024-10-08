@@ -1,14 +1,8 @@
 import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton
-} from '@clerk/nextjs'
-import "./globals.css";
+import { ClerkProvider } from '@clerk/nextjs'
 import { Analytics } from "@vercel/analytics/react"
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

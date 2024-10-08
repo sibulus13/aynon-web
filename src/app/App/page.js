@@ -17,7 +17,7 @@ import { MdAddCircleOutline } from "react-icons/md";
 import { useUser } from '@clerk/clerk-react'
 
 export default function Home() {
-  const { isSignedIn, user, isLoaded } = useUser()
+  const { user } = useUser()
   const [loading, setLoading] = useState(true);
   const [inCanada, setInCanada] = useState(true);
   const [coord, setCoord] = useState();

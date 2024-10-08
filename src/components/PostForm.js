@@ -1,7 +1,6 @@
 import React from 'react';
 
 const PostForm = ({ content, setContent }) => {
-
     return (
         <div className='h-full flex-col'>
             <form className='grow'>

@@ -2,10 +2,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { canadianAnimals } from '@/lib/user';
 import { IoMdGlasses } from "react-icons/io";
 import { IoMdArrowBack } from 'react-icons/io';
-import { IoIosSend } from "react-icons/io";
-import {
-    UserButton
-} from '@clerk/nextjs'
+import { UserButton } from '@clerk/nextjs'
 
 export default function Header({ region, userAnimal, setUserAnimal, page, back, send }) {
     function setAnimal(e) {
@@ -19,13 +16,6 @@ export default function Header({ region, userAnimal, setUserAnimal, page, back, 
         };
 
         return { visibility: 'visible', disabled: false };
-    }
-
-    function showPostButton() {
-        if (page === 'post' || page === 'comment' || page === 'feedback') {
-            return { visibility: 'visible', disabled: false };
-        };
-        return { visibility: 'hidden', disabled: true };
     }
 
     function showAnimalSelector() {
@@ -71,15 +61,6 @@ export default function Header({ region, userAnimal, setUserAnimal, page, back, 
                         </div>
                     )}
                 </span>
-                {/* <button>
-                    <IoIosSend
-                        onClick={() => send()}
-                        className="text-2xl font-semibold disabled:text-gray-300"
-                        disabled={showPostButton().disabled}
-                        visibility={showPostButton().visibility}
-                    >
-                    </IoIosSend>
-                </button> */}
             </div>
         </div>
     )
