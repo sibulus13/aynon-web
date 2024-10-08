@@ -148,6 +148,7 @@ export default function Home() {
                       setPost={setPost}
                       setPosts={setPosts}
                       toComments={toComments}
+                      user_id={user.id}
                     />
                   </div>
                   : null

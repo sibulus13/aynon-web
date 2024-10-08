@@ -120,3 +120,45 @@ export async function uploadFeedback(name, email, content) {
             }
         )
 }
+
+export async function upsertPostVote(user_id, post_id, vote) {
+    const { data, error } = await supabase
+        .from('votes')
+        .upsert(
+            {
+                user_id: user_id,
+                post_id: post_id,
+                vote_type: vote
+            },
+            { onConflict: ['user_id', 'post_id'] }
+        )
+        .single();
+
+    if (error) {
+        console.error(error);
+        return null;
+    }
+
+    return data;
+}
+
+export async function upsertCommentVote(user_id, comment_id, vote) {
+    const { data, error } = await supabase
+        .from('votes')
+        .upsert(
+            {
+                user_id: user_id,
+                comment_id: comment_id,
+                vote_type: vote
+            },
+            { onConflict: ['user_id', 'comment_id'] }
+        )
+        .single();
+
+    if (error) {
+        console.error(error);
+        return null;
+    }
+
+    return data;
+}
