@@ -104,7 +104,7 @@ export async function uploadComment(user, post_id, content, userAnimal, region_i
 export async function getComments(post_id) {
     const { data, error } = await supabase
         .from('comments')
-        .select('*')
+        .select('*, locations(name)')
         .eq('post_id', post_id)
     return data;
 }
