@@ -118,7 +118,7 @@ export default function Home() {
   }, [isLoaded]);
 
   return (
-    <main className='px-10 md:px-40 lg:px-60 h-screen'>
+    <main className='px-10 md:px-40 lg:px-60 h-full'>
       {!loading ? (
         inCanada ? (
           <div className='flex flex-col h-full'>
@@ -193,7 +193,7 @@ export default function Home() {
             </div>
             <div>
               <MdAddCircleOutline
-                className='fixed text-5xl cursor-pointer inset-x-1/2 bottom-20 bg-white rounded-full'
+                className='fixed text-5xl cursor-pointer bottom-20 bg-white rounded-full m-auto left-0 right-0'
                 onClick={() => setPage('post')}
                 visibility={showPostButton().visibility}
                 disabled={showPostButton().disabled}

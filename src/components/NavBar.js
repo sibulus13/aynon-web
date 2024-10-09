@@ -2,7 +2,7 @@ import React from 'react';
 import { IoIosSend } from "react-icons/io";
 
 const NavBar = ({ page, send, content, setContent }) => {
-    
+
     const showSubmit = page === 'comment' || page === 'post' || page === 'feedback';
     const showTextInput = page === 'comment' || page === 'feedback';
     const textarea = document.getElementById('content');
@@ -28,8 +28,7 @@ const NavBar = ({ page, send, content, setContent }) => {
                                 onChange={(e) => setContent(e.target.value)}
                             />
                         </div>
-                        :
-                        null}
+                        : null}
                     <div className='flex justify-end'>
                         <button
                             onClick={async (e) => await send(e)}
@@ -44,7 +43,9 @@ const NavBar = ({ page, send, content, setContent }) => {
                 </form>
             </div>
             :
-            null
+            <div>
+                <br></br>
+            </div>
     );
 };
 
