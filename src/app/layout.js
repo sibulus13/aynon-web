@@ -7,7 +7,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "AynonA",
+  title: "Aynon",
   description: "A Canadian anonymous social forum",
   rel: "icon",
   href: "/icon.ico",
