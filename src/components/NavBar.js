@@ -10,6 +10,9 @@ const NavBar = ({ page, send, content, setContent }) => {
         textarea.addEventListener("input", function () {
             this.style.height = "auto";  // Reset height to auto
             this.style.height = (this.scrollHeight) + "px";  // Set new height based on scroll height
+            if (!content) {
+                this.style.height = "auto";
+            }
         });
     }
 
