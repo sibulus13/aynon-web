@@ -31,7 +31,7 @@ export default function Header({ region, userAnimal, setUserAnimal, page, back, 
                 <FaLocationDot />
                 {region}
             </h1>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-1">
                 <span className="grid-cols-1">
                     <button>
                         <IoMdArrowBack
