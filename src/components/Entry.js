@@ -65,7 +65,7 @@ const Entry = ({ post, user_id, type = 'post', onClick = () => { } }) => {
             </div>
 
             <div className="overflow-hidden">
-                <p className='break-all'>{post.content}</p>
+                <p className='break-words'>{post.content}</p>
             </div>
         </div>
     );
