@@ -42,7 +42,7 @@ export default function Header({ region, userAnimal, setUserAnimal, page, back, 
                         />
                     </button>
                 </span>
-                <span className="grid-cols-1 flex justify-center">
+                <span className="grid-cols-1 flex justify-end sm:justify-center">
                     <UserButton />
                 </span>
                 <span className="grid-cols-1">
